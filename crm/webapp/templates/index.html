@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>
+        Hello World
+    </h1>
+
+    <div>
+        <a class="btn btn-outline-secondary" href="{% url 'signin' %}" role="button">Sign In</a>
+        <a class="btn btn-outline-primary" href="{% url 'signup' %}" role="button">Sign Up</a>
+    </div>
+{% endblock %}
