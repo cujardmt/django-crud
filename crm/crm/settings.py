@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 
+from django.urls import reverse_lazy
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -48,6 +50,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django_session_timeout.middleware.SessionTimeoutMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -131,4 +134,25 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+# sigin in page
 LOGIN_URL = 'signin'
+
+# redirect to sign in when user logs out
+LOGOUT_REDIRECT_URL = 'signin' # reverse_lazy('login_view')
+
+
+# expire in one minute of inactivity
+# SESSION_COOKIE_AGE = 60
+
+# save session data on every request
+# SESSION_SAVE_EVERY_REQUEST = True
+
+SESSION_EXPIRE_SECONDS = 180
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_TIMEOUT_REDIRECT = reverse_lazy('signin')
+
+
+# https://stackoverflow.com/questions/2539109/logging-users-out-of-a-django-site-after-n-minutes-of-inactivity
+# https://stackoverflow.com/questions/69129989/how-do-i-redirect-back-to-the-login-page-after-10-seconds-of-inactivity-using-dj
+# https://pypi.org/project/django-session-timeout/
