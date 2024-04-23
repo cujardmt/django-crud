@@ -2,8 +2,17 @@
 
 {% block content %}
 
-    <h5> Welcome, {{user}}! 👋 </h5>
+    <div class="min-vh-100 d-flex flex-column justify-content-center align-items-center">
+        <h5> Welcome, {{user}}! 👋 </h5>
+        <p> What do you want to do today? </p>
+        <div>
+            <a class="btn btn-outline-secondary" href="{% url 'trs-dash' %}">Create Travel Request</a>
+            <a class="btn btn-outline-secondary" href="{% url 'trs-dash' %}">Create an Invoice</a>
+            <a class="btn btn-outline-secondary" href="{% url 'trs-dash' %}">Create new Liquidation</a>
+        </div>
+    </div>
 
+{% comment %}     
     <hr>
         <a class="btn btn-outline-primary btn-sm" href="{% url 'create-record' %}">
             Create a new record &nbsp; <i class="fa fa-plus-circle" aria-hidden="true"></i>
@@ -43,7 +52,8 @@
             {% endfor %}
         {% endif %}
         </tbody>
-    </table>
+    </table> 
+{% endcomment %}
 
 
 {% endblock %}

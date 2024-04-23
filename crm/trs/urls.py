@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
     # home page will display a dashboard
-    path('', views.home, name="home"),
+    path('', views.home, name="trs-dash"),
     
     # CRUD
     path('create-travel-request', views.createTravelRequest, name="create-travel-request"),
