@@ -2,6 +2,9 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
+from .forms import TravelerForm
+from .models import Traveler
+
 
 # - Home Page
 @login_required()
@@ -11,7 +14,18 @@ def home(request):
 # create a travel request
 @login_required()
 def createTravelRequest(request):
-    return render(request, 'trs/create-travel-request.html')
+    form = TravelerForm()
+    
+    if request.method == 'POST':
+        form = TravelerForm(request.POST)
+        
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your record was saved successfully.")
+            return redirect("dashboard")
+        
+    context = {'form': form}
+    return render(request, 'trs/create-travel-request.html', context)
 
 # read single travel request
 @login_required()
