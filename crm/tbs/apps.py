@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class TrsConfig(AppConfig):
+class TbsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'trs'
+    name = 'tbs'

@@ -51,6 +51,16 @@
                 {{form.country|as_crispy_field}}
 
                 <br>
+                {{form.travel_date|as_crispy_field}}
+
+                <br>
+                {{form.return_date|as_crispy_field}}
+
+                <br>
+                {{form.country_destination|as_crispy_field}}
+
+                <br>
+
                 
                 <button type="submit" class="btn btn-primary"> 
                     
@@ -60,7 +70,7 @@
 
                 &nbsp;
 
-                <a href="{% url 'dashboard' %}" class="btn btn-secondary"> 
+                <a href="{% url 'trs-dash' %}" class="btn btn-secondary"> 
 
 
                     Return &nbsp; <i class="fa fa-arrow-left" aria-hidden="true"></i>

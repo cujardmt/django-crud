@@ -4,7 +4,7 @@ from django.contrib.auth import logout
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
+from django.contrib.auth.decorators import permission_required
 from .forms import CreateUserForm, LoginForm, UpdateRecordForm, CreateRecordForm
 from .models import Record
 
@@ -63,54 +63,8 @@ def signOut(request):
 # Display all existing records (for now)
 # route to settings.LOGIN_URL if not authenticated
 @login_required()
+# @permission_required('webapp.view_record', 'trs-dash') # trs-dash temporary
 def dashboard(request):
     records = Record.objects.all()
     context = {'records': records}
     return render(request, 'dashboard.html', context)
-
-
-@login_required()
-def createRecord(request):
-    form = CreateRecordForm()
-    if request.method == 'POST':
-        form = CreateRecordForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Your record was created!")
-            return redirect("dashboard")
-
-    context = {'form': form}
-    return render(request, 'create-record.html', context)
-
-
-@login_required()
-def readRecord(request, pk):
-    record = Record.objects.get(id=pk)
-    context = {'record': record}
-    return render(request, 'view-record.html', context)
-
-
-@login_required()
-def updateRecord(request, pk):
-    record = Record.objects.get(id=pk)
-    form = UpdateRecordForm(instance=record)
-    if request.method == 'POST':
-        form = UpdateRecordForm(request.POST, instance=record)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Your record was updated!")
-            return redirect("dashboard")
-        
-    context = {'form':form}
-    return render(request, 'update-record.html', context=context)
-    
-
-@login_required()
-def deleteRecord(request, pk):
-    record = Record.objects.get(id=pk)
-    
-    # TODO Exception handling?
-    record.delete()
-    messages.success(request, "Your record was deleted!")
-    return redirect("dashboard")
-    
