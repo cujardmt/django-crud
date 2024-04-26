@@ -5,8 +5,8 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.decorators import permission_required
-from .forms import CreateUserForm, LoginForm, UpdateRecordForm, CreateRecordForm
-from .models import Record
+from .forms import CreateUserForm, LoginForm
+
 
 # - Home Page
 def home(request):
@@ -65,6 +65,4 @@ def signOut(request):
 @login_required()
 # @permission_required('webapp.view_record', 'trs-dash') # trs-dash temporary
 def dashboard(request):
-    records = Record.objects.all()
-    context = {'records': records}
-    return render(request, 'dashboard.html', context)
+    return render(request, 'dashboard.html')
