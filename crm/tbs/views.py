@@ -51,7 +51,7 @@ def updateTravelRequest(request, pk):
             return redirect("dashboard")
         
     context = {'form':form}
-    return render(request, 'trs/update-travel-request.html', context)
+    return render(request, 'tbs/update-travel-request.html', context)
 
 
 # delete
